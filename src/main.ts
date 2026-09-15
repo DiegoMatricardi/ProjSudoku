@@ -1,5 +1,6 @@
+import { DFS } from "./algorithms/DFS.js";
+import { BFS } from "./algorithms/BFS.js";
 import { Sudoku } from "./models/sudoku.js";
-import { SudokuUtils } from "./utils/SudokuUtils.js";
 
 const board = [
     [5, 3, 0, 0, 7, 0, 0, 0, 0],
@@ -13,8 +14,26 @@ const board = [
     [0, 0, 0, 0, 8, 0, 0, 7, 9]
 ];
 
-const sudoku = new Sudoku(board);
+const sudokuDFS = new Sudoku(board.map(linha => [...linha]));
+const dfs = new DFS();
+const solucaoDFS = dfs.solucaoDFS(sudokuDFS);
+console.log("----- DFS -----");
+console.log("Encontrou solução:", solucaoDFS);
+console.log("Estados analisados:", dfs.quantAnalisados);
+console.table(sudokuDFS.getTabuleiro());
 
-console.log(
-    SudokuUtils.movValido(sudoku, 0, 2, 4)
-);
+
+
+const sudokuBFS = new Sudoku(board.map(linha => [...linha]));
+const bfs = new BFS();
+const solucaoBFS = bfs.solucaoBFS(sudokuBFS);
+console.log("----- BFS -----");
+if (solucaoBFS !== null) {
+
+    console.log("Encontrou solução: true");
+    console.log("Estados analisados:", bfs.quantAnalisados);
+    console.table(solucaoBFS.getTabuleiro());
+
+} else {
+    console.log("Encontrou solução: false");
+}
