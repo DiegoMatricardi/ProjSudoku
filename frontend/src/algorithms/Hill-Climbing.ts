@@ -4,13 +4,18 @@ import { Heuristica } from "../heuristica/heuristica.js";
 
 export class HillClimbing {
     quantAnalisados = 0;
-
+    passos: number[][][] = [];
     solucaoHillClimbing(sudoku: Sudoku): Sudoku | null {
         let atual = sudoku;
 
         while(true) {
             this.quantAnalisados++;
+            
+            const tabuleiroAtual = atual.getTabuleiro();
 
+            this.passos.push(
+                tabuleiroAtual.map(linha => [...linha])
+            );
             //Encontra a celula MRV
             const mrv = Heuristica.encontrarMRV(atual);
 

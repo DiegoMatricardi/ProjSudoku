@@ -9,6 +9,7 @@ type Estado = {
 
 export class BranchAndBound {
     quantAnalisados = 0;
+    passos: number[][][] = [];
 
     solucaoBranchAndBound(sudoku: Sudoku): Sudoku | null {
         const abertos: Estado[] = [];
@@ -32,6 +33,11 @@ export class BranchAndBound {
 
             this.quantAnalisados++;
 
+            const tabuleiroAtual = atual.getTabuleiro();
+            this.passos.push(
+                tabuleiroAtual.map(linha => [...linha])
+            );
+            
             const mrv = Heuristica.encontrarMRV(atual);
             if(mrv.linha === -1) {
                 return atual;

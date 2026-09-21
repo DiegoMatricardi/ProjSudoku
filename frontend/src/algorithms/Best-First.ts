@@ -4,6 +4,7 @@ import { Heuristica } from "../heuristica/heuristica.js";
 
 export class BestFirst {
     quantAnalisados = 0;
+    passos: number[][][] = [];
     soluçãoBestFirst(sudoku: Sudoku): Sudoku | null {
 
         const abertos: Sudoku[] = [];
@@ -30,6 +31,13 @@ export class BestFirst {
 
             this.quantAnalisados++;
 
+            // Guarda o estado que o Best-First escolheu para analisar
+            const tabuleiroAtual = atual.getTabuleiro();
+
+            this.passos.push(
+                tabuleiroAtual.map(linha => [...linha])
+            );
+            
             // Encontra a célula mais restrita
             const mrv = Heuristica.encontrarMRV(atual);
 

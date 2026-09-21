@@ -9,7 +9,7 @@ type Estado = {
 
 export class AEstrela {
     quantAnalisados = 0;
-
+    passos: number[][][] = [];
     solucaoAEstrela(sudoku: Sudoku): Sudoku | null {
         const abertos: Estado[] = [];
 
@@ -31,7 +31,12 @@ export class AEstrela {
             const estadoAtual = abertos.splice(menorIndice, 1)[0]!;
             const atual = estadoAtual.sudoku;
             this.quantAnalisados++;
+            
+            const tabuleiroAtual = atual.getTabuleiro();
 
+            this.passos.push(
+                tabuleiroAtual.map(linha => [...linha])
+            );
             const mrv = Heuristica.encontrarMRV(atual);
             // Se não existem células vazias, encontrou a solução
             if (mrv.linha === -1) {

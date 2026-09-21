@@ -57,3 +57,9 @@
   font-size: 15px;
   cursor: pointer;
 }
+
+.mensagem-erro {
+  color: red;
+  font-weight: bold;
+  margin-top: 10px;
+}

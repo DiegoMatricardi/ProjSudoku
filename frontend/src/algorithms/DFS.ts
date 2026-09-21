@@ -4,10 +4,14 @@ import { SudokuUtils } from "../utils/SudokuUtils.js";
 export class DFS {
     //Contador de quantos estados foram analisados
     quantAnalisados = 0;
+    passos: number[][][] = [];
     solucaoDFS(sudoku: Sudoku):boolean {
         this.quantAnalisados++;
 
         const tabuleiro = sudoku.getTabuleiro();
+        this.passos.push(
+            tabuleiro.map(linha => [...linha])
+        );
         //Realizar a busca por celula vazia
         let linhaVazia = -1;
         let colVazia = -1;

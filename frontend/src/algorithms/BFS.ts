@@ -3,6 +3,7 @@ import { SudokuUtils } from "../utils/SudokuUtils.js";
 
 export class BFS {
     quantAnalisados = 0;
+    passos: number[][][] = [];
     solucaoBFS(sudoku: Sudoku): Sudoku | null {
         const fila: Sudoku[] = [];
         fila.push(sudoku);
@@ -13,6 +14,11 @@ export class BFS {
             this.quantAnalisados++;
 
             const tabuleiro = atual.getTabuleiro();
+
+            // Guarda o estado que está sendo analisado
+            this.passos.push(
+                tabuleiro.map(linha => [...linha])
+            );
 
             let linhaVazia = -1;
             let colVazia = -1;
